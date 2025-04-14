@@ -1,27 +1,22 @@
 object pepita {
   var energia = 100
-
+  
   method energia() = energia
-
+  
   method volar(distancia) {
     self.validarVolar(distancia)
-    energia = energia - self.energiaParaVolar(distancia)
+    energia -= self.energiaParaVolar(distancia)
   }
-
+  
   method validarVolar(distancia) {
-    if (energia < self.energiaParaVolar(distancia)) {
-      self.error("No puedo volar esta distancia")
-    }
+    if (energia < self.energiaParaVolar(distancia)) self.error("No puedo volar esta distancia")
   }
-
-  method energiaParaVolar(distancia) {
-    return 10 + distancia
-  }
-
+  
+  method energiaParaVolar(distancia) = 10 + distancia
+  
   method comer(alimento) {
-    energia = energia + alimento.energiaQueAporta()
+    energia += alimento.energiaQueAporta()
   }
-
 }
 
 object alpiste {
@@ -29,17 +24,39 @@ object alpiste {
 }
 
 object miAsserter {
-
-    method assertException(bloque) {
-
-      try {
-        bloque.apply() //ejecuto el bloque
-        return false //no anda como espero
-      }
-      catch e: Exception {
-        return true //anda como espero
-      } 
-      
+  method assertException(bloque) {
+    try {
+      bloque.apply() //ejecuto el bloque
+      return false //no anda como espero
+    } catch e : Exception {
+      return true //anda como espero
     }
+  }
+}
+object pepon {
+  
+}
+object roque {
+  var ave = pepita
+  var rutina = {}
 
+  method rutina(_rutina){
+    rutina = _rutina
+  }
+  method ave(_ave) {
+    ave=_ave
+  }
+  method ave() = ave
+
+  method entrenarAve(distancia){
+    ave.volar(distancia)
+  }
+
+  method entrenar(miRutina) {
+    miRutina.apply()
+  }
+  
+  method alimentar(alimento) {
+    ave.comer(alimento)
+  }
 }
