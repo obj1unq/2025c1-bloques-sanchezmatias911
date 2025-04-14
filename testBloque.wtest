@@ -1,19 +1,45 @@
 import bloques.*
 
 describe "pepita volar" {
-
   test "pepita has initial energy" {
     pepita.volar(10)
     assert.equals(80, pepita.energia())
-    assert.throwsException({pepita.volar(1000)})
+    assert.throwsException({ pepita.volar(1000) })
   }
-
+  
   test "mi asserter" {
     //Espero que mi asserter diga que está mal que pepita.volar(10) lanza error (ya que no lo lanza)
-    assert.notThat( miAsserter.assertException( { pepita.volar(10) } ))
+    assert.notThat(miAsserter.assertException({ pepita.volar(10) }))
     assert.equals(80, pepita.energia())
     //Espero que mi asserter diga que está bien que pepita.volar(100) lanza error
-    assert.that( miAsserter.assertException( { pepita.volar(1000) } ))
+    assert.that(miAsserter.assertException({ pepita.volar(1000) }))
   }
+  
+  test "rutina uno" {
+    var rutina = { 
+      roque.alimentar(alpiste);
+      roque.entrenarAve(5)
+    }
+    roque.entrenar(rutina)
+    assert.equals(105, pepita.energia())
+  }
+  
+  test "rutina dos" {
+    var rutina = { 
+      roque.entrenarAve(5);
+      roque.alimentar(alpiste);
+      roque.entrenarAve(5)
+    }
+    roque.entrenar(rutina)
+    assert.equals(90, pepita.energia())
+  }
+  test "rutina 3"{
+    var rutina = {
+      roque.alimentar(alpiste);
+      roque.entrenarAve(1000);
+      roque.alimentar(alpiste)
+    }
+    assert.throwsException({roque.entrenar(rutina)})
 
+  }
 }
